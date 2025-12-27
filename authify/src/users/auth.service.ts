@@ -1,4 +1,9 @@
-import { BadRequestException, Body, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
@@ -24,7 +29,7 @@ export class AuthService {
   async signin(input: CreateUserDto) {
     const [user] = await this.userService.find(input.email);
     if (!user) {
-      throw new BadRequestException('Invalid email or password');
+      throw new NotFoundException('user not found');
     }
     const [salt, storedHash] = user.password.split('.');
     const hash = (await scrypt(input.password, salt, 32)) as Buffer;
