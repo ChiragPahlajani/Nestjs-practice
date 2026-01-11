@@ -16,7 +16,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
-import { Serialize } from './interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { User } from './user.entity';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { AuthGuard } from './guards/auth.guard';
